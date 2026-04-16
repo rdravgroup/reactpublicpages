@@ -4,8 +4,8 @@ import { subscribeNewsletter } from '../../utils/contactApi.js'
 import logoFull from '../../assets/logo-full.png'
 import './Footer.css'
 
-const INVOICE_URL = import.meta.env.VITE_INVOICE_APP_URL || 'https://rnstoreapp.vercel.app/login?app=invoice'
-const MUSIC_URL   = import.meta.env.VITE_MUSIC_APP_URL   || 'https://rnstoreapp.vercel.app/login?app=music'
+const INVOICE_URL = import.meta.env.VITE_INVOICE_APP_URL || 'https://login.codexclear.com/login?app=invoice'
+const MUSIC_URL   = import.meta.env.VITE_MUSIC_APP_URL   || 'https://login.codexclear.com/login?app=music'
 
 const SOCIALS = [
   { icon: '𝕏',  label: 'Twitter / X' },
@@ -48,7 +48,9 @@ export default function Footer() {
               Modern IT services and digital products — delivered with clarity from Lucknow, UP, India.<br />
               <a href="tel:+918400087325">+91-8400087325</a>
               {' · '}
-              <a href="mailto:info@codexclear.com">info@codexclear.com</a>
+              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a>
+              {' · '}
+              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a>
             </p>
             <div className="footer__socials">
               {SOCIALS.map(s => (
@@ -89,8 +91,10 @@ export default function Footer() {
               Gomtinagar Extension<br />
               Lucknow – 226010, UP, India<br />
               <a href="tel:+918400087325">+91-8400087325</a><br />
-              <a href="mailto:info@codexclear.com">info@codexclear.com</a><br />
-              <a href="mailto:support@codexclear.com">support@codexclear.com</a>
+              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a><br />
+              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a><br />
+              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a><br />
+              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a>
             </address>
 
             <h6 className="footer__heading" style={{ marginTop: '1.5rem' }}>Stay Updated</h6>

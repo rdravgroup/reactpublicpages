@@ -106,8 +106,8 @@ export default function Contact() {
             <div className="card reveal delay-1 text-center">
               <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>✉️</div>
               <h5 className="card-title">Email</h5>
-              <a href="mailto:info@codexclear.com" className="info-link">info@codexclear.com</a>
-              <a href="mailto:support@codexclear.com" className="info-link" style={{ display:'block' }}>support@codexclear.com</a>
+              <a href="mailto:sanju27586@gmail.com" className="info-link">sanju27586@gmail.com</a>
+              <a href="mailto:sanju27586@gmail.com" className="info-link" style={{ display:'block' }}>sanju27586@gmail.com</a>
             </div>
             <div className="card reveal delay-2 text-center">
               <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>🏢</div>
@@ -222,7 +222,7 @@ export default function Contact() {
                 <h5 style={{ fontWeight:700, marginBottom:'.4rem', color:'var(--text-primary)' }}>Need faster help?</h5>
                 <p style={{ fontSize:'.85rem', color:'var(--text-secondary)', marginBottom:'1rem' }}>Call or WhatsApp us directly</p>
                 <a href="tel:+918400087325" className="btn btn-grad btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex', marginBottom:'.5rem' }}>📞 +91-8400087325</a>
-                <a href="mailto:info@codexclear.com" className="btn btn-outline btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex' }}>✉️ info@codexclear.com</a>
+                <a href="mailto:sanju27586@gmail.com" className="btn btn-outline btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex' }}>✉️ sanju27586@gmail.com</a>
               </div>
 
               <div className="card">

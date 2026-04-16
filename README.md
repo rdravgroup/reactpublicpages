@@ -93,10 +93,10 @@ All prefixed with `VITE_` (Vite convention — accessible via `import.meta.env.V
 | Variable | Default | Description |
 |---|---|---|
 | `VITE_API_BASE_URL` | `https://codexclear.com` | .NET Core API base URL |
-| `VITE_LOGIN_URL` | `https://rnstoreapp.vercel.app/login` | Angular app login |
-| `VITE_REGISTER_URL` | `https://rnstoreapp.vercel.app/register` | Angular app register |
-| `VITE_INVOICE_APP_URL` | `https://rnstoreapp.vercel.app/login?app=invoice` | Invoice app |
-| `VITE_MUSIC_APP_URL` | `https://rnstoreapp.vercel.app/login?app=music` | Music app |
+| `VITE_LOGIN_URL` | `https://login.codexclear.com/login` | Angular app login |
+| `VITE_REGISTER_URL` | `https://login.codexclear.com/register` | Angular app register |
+| `VITE_INVOICE_APP_URL` | `https://login.codexclear.com/login?app=invoice` | Invoice app |
+| `VITE_MUSIC_APP_URL` | `https://login.codexclear.com/login?app=music` | Music app |
 
 ---
 

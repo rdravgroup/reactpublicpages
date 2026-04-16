@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import './Products.css'
 
-const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://rnstoreapp.vercel.app/login?app=invoice'
-const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://rnstoreapp.vercel.app/login?app=music'
-const REGISTER_URL = import.meta.env.VITE_REGISTER_URL    || 'https://rnstoreapp.vercel.app/register'
+const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://login.codexclear.com/login?app=invoice'
+const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://login.codexclear.com/login?app=music'
+const REGISTER_URL = import.meta.env.VITE_REGISTER_URL    || 'https://login.codexclear.com/register'
 
 const LIVE = [
   { icon:'🧾', cls:'invoice', name:'Invoice Manager', badge:'Live Now', bcls:'status-badge--live', href:INVOICE_URL, tags:['Angular 17','.NET Core 8','Admin Panel','PDF Export','Reports'], desc:'Full-featured invoicing and billing system. Create customers, products, invoices, and purchase orders — with a polished admin panel and .NET Core API.', cta:'Sign In to Invoice App', cta2:'Create Account', cta2href:REGISTER_URL },
