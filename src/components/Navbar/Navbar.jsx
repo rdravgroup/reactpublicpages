@@ -4,10 +4,10 @@ import { useTheme } from '../../context/ThemeContext.jsx'
 import logoIcon from '../../assets/logo.png'
 import './Navbar.css'
 
-const LOGIN_URL    = import.meta.env.VITE_LOGIN_URL    || 'https://rnstoreapp.vercel.app/login'
-const REGISTER_URL = import.meta.env.VITE_REGISTER_URL || 'https://rnstoreapp.vercel.app/register'
-const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://rnstoreapp.vercel.app/login?app=invoice'
-const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://rnstoreapp.vercel.app/login?app=music'
+const LOGIN_URL    = import.meta.env.VITE_LOGIN_URL    || 'https://login.codexclear.com/login'
+const REGISTER_URL = import.meta.env.VITE_REGISTER_URL || 'https://login.codexclear.com/register'
+const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://login.codexclear.com/login?app=invoice'
+const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://login.codexclear.com/login?app=music'
 
 const THEMES = [
   { key: 'default', label: 'Deep Navy',     swatch: 'swatch--navy'   },

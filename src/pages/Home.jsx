@@ -4,9 +4,9 @@ import { usePageReveal } from '../hooks/useScrollReveal.js'
 import { useCounter } from '../hooks/useCounter.js'
 import './Home.css'
 
-const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://rnstoreapp.vercel.app/login?app=invoice'
-const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://rnstoreapp.vercel.app/login?app=music'
-const REGISTER_URL = import.meta.env.VITE_REGISTER_URL    || 'https://rnstoreapp.vercel.app/register'
+const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://login.codexclear.com/login?app=invoice'
+const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://login.codexclear.com/login?app=music'
+const REGISTER_URL = import.meta.env.VITE_REGISTER_URL    || 'https://login.codexclear.com/register'
 
 const SERVICES = [
   { icon:'💼', title:'IT Consulting',      desc:'Strategic technology roadmapping, architecture design, and digital transformation advisory.' },
