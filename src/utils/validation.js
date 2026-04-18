@@ -12,10 +12,10 @@ export const rules = {
 
   phone: (v) => {
     if (!v) return null
-    const clean = String(v).replace(/[\s\-().+]/g, '')
-    return /^[0-9]{8,12}$/.test(clean)
+    const clean = String(v).replace(/\D/g, '')
+    return /^[0-9]{10}$/.test(clean)
       ? null
-      : 'Enter a valid phone number (8–12 digits).'
+      : 'Enter a valid phone number (10 digits).'
   },
 
   minLen: (min) => (v) =>
@@ -45,13 +45,14 @@ export function validateContact(form) {
   const name = validate(form.name, [rules.required, rules.minLen(2), rules.maxLen(80)])
   if (name) errors.name = name
 
-  const email = validate(form.email, [rules.required, rules.email])
+  const email = validate(form.email, [rules.required, rules.maxLen(33), rules.email])
   if (email) errors.email = email
 
-  if (form.phone) {
-    const phone = validate(form.phone, [rules.phone])
-    if (phone) errors.phone = phone
-  }
+  const countryCode = validate(form.countryCode, [rules.required])
+  if (countryCode) errors.countryCode = countryCode
+
+  const phone = validate(form.phone, [rules.required, rules.phone])
+  if (phone) errors.phone = phone
 
   const service = validate(form.service, [rules.required])
   if (service) errors.service = service

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { subscribeNewsletter } from '../../utils/contactApi.js'
+import { usePrivacyModal } from '../../context/PrivacyModalContext.jsx'
 import logoFull from '../../assets/logo-full.png'
 import './Footer.css'
 
@@ -17,22 +18,31 @@ const SOCIALS = [
 
 export default function Footer() {
   const [email,  setEmail]  = useState('')
+  const [firstName, setFirstName] = useState('')
   const [status, setStatus] = useState(null) // null | 'loading' | 'ok' | 'err'
   const [msg,    setMsg]    = useState('')
 
   const handleSubscribe = async (e) => {
     e.preventDefault()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    const trimmed = email.trim()
+    const ftrim = firstName.trim()
+    if (!trimmed) { setStatus('err'); setMsg('Please enter your email address.'); return }
+    if (trimmed.length > 33) { setStatus('err'); setMsg('Email must be 33 characters or less.'); return }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
       setStatus('err'); setMsg('Please enter a valid email address.'); return
     }
+    if (ftrim.length > 33) { setStatus('err'); setMsg('First name must be 33 characters or less.'); return }
     setStatus('loading')
     try {
-      const m = await subscribeNewsletter(email)
+      const m = await subscribeNewsletter(trimmed, ftrim || null)
       setStatus('ok'); setMsg(m); setEmail('')
+      setFirstName('')
     } catch (err) {
       setStatus('err'); setMsg(err.message || 'Something went wrong.')
     }
   }
+
+  const { showPrivacy } = usePrivacyModal()
 
   return (
     <footer className="footer">
@@ -48,9 +58,9 @@ export default function Footer() {
               Modern IT services and digital products — delivered with clarity from Lucknow, UP, India.<br />
               <a href="tel:+918400087325">+91-8400087325</a>
               {' · '}
-              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a>
+              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a>
               {' · '}
-              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a>
+              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a>
             </p>
             <div className="footer__socials">
               {SOCIALS.map(s => (
@@ -91,14 +101,24 @@ export default function Footer() {
               Gomtinagar Extension<br />
               Lucknow – 226010, UP, India<br />
               <a href="tel:+918400087325">+91-8400087325</a><br />
-              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a><br />
-              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a><br />
-              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a><br />
-              <a href="mailto:sanju27586@gmail.com">sanju27586@gmail.com</a>
+              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a><br />
+              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a><br />
+              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a><br />
+              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a>
             </address>
 
             <h6 className="footer__heading" style={{ marginTop: '1.5rem' }}>Stay Updated</h6>
             <form className="newsletter-row" onSubmit={handleSubscribe} noValidate>
+              <input
+                type="text"
+                className="newsletter-input"
+                placeholder="First name (optional)"
+                value={firstName}
+                maxLength={33}
+                onChange={e => { setFirstName(e.target.value); setStatus(null) }}
+                aria-label="First name for personalization"
+                disabled={status === 'loading' || status === 'ok'}
+              />
               <input
                 type="email"
                 className="newsletter-input"
@@ -120,7 +140,7 @@ export default function Footer() {
         <div className="footer__bottom">
           <p className="footer__copy">© 2025 CodeXClear.com · All rights reserved. · Lucknow, UP, India</p>
           <div className="footer__legal">
-            <Link to="#">Privacy Policy</Link>
+            <a href="#" onClick={(e)=>{ e.preventDefault(); showPrivacy() }}>Privacy Policy</a>
             <Link to="#">Terms of Service</Link>
             <Link to="#">Cookies</Link>
           </div>

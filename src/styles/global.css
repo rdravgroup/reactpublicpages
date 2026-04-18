@@ -315,6 +315,14 @@ button { cursor: pointer; font-family: inherit; }
   max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .mat-field textarea ~ label { top: 28px; transform: none; }
+.mat-field select ~ label {
+  /* Float select labels above the control to avoid overlapping the native placeholder option */
+  top: 10px;
+  transform: none;
+  font-size: 0.72rem;
+  color: var(--input-ph);
+  font-weight: 600;
+}
 .mat-field input:focus ~ label,
 .mat-field input:not(:placeholder-shown) ~ label,
 .mat-field textarea:focus ~ label,
@@ -395,4 +403,24 @@ button { cursor: pointer; font-family: inherit; }
 @media (max-width: 600px) {
   .bottom-nav { display: flex; }
   body { padding-bottom: 62px; }
+}
+
+/* Modal overlay + card for privacy */
+.modal-overlay {
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  z-index: 2000; padding: 2rem;
+  background: rgba(0,0,0,0); /* animated */
+  opacity: 0; transition: opacity 220ms ease;
+}
+.modal-overlay.modal-enter { opacity: 1; background: rgba(0,0,0,0.6); }
+.modal-overlay.modal-exit  { opacity: 0; background: rgba(0,0,0,0); pointer-events: none; }
+.modal-card {
+  background: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px; padding: 1.5rem;
+  width: min(920px, 98%); max-height: 90vh; overflow: auto; position: relative;
+  transform: translateY(6px) scale(0.995); opacity: 0; transition: transform 220ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
+}
+.modal-card.modal-enter { transform: translateY(0) scale(1); opacity: 1; }
+.modal-card.modal-exit  { transform: translateY(6px) scale(0.995); opacity: 0; }
+.modal-close {
+  position: absolute; right: 12px; top: 12px; background: transparent; border: none; color: var(--text-muted); font-size: 1.35rem; cursor: pointer;
 }

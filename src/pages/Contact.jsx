@@ -2,26 +2,20 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import { validateContact } from '../utils/validation.js'
-import { sendContactForm } from '../utils/contactApi.js'
+import { sendContactForm, getServiceList } from '../utils/contactApi.js'
+import { usePrivacyModal } from '../context/PrivacyModalContext.jsx'
 import './Contact.css'
 
-const SERVICES = [
-  { value:'',             label:'Select a service…',   disabled:true },
-  { value:'consulting',   label:'IT Consulting'        },
-  { value:'engineering',  label:'Software Engineering' },
-  { value:'cloud',        label:'Cloud & DevOps'       },
-  { value:'erp',          label:'ERP Solutions'        },
-  { value:'security',     label:'Cybersecurity'        },
-  { value:'invoice',      label:'Invoice Manager Demo' },
-  { value:'music',        label:'Music App'            },
-  { value:'shadi',        label:'Shadi Portal'         },
-  { value:'ride',         label:'CX Ride App'          },
-  { value:'classifieds',  label:'CX Classifieds'       },
-  { value:'housing',      label:'CX Housing Portal'    },
-  { value:'other',        label:'Other / General Enquiry' },
+const COUNTRY_CODES = [
+  { code:'+91', label:'India (+91)' },
+  { code:'+1',  label:'USA (+1)' },
+  { code:'+44', label:'UK (+44)' },
+  { code:'+61', label:'Australia (+61)' },
+  { code:'+971', label:'UAE (+971)' },
+  { code:'other', label:'Other (enter number)' },
 ]
 
-const INIT = { name:'', email:'', phone:'', company:'', service:'', message:'', agreed:false }
+const INIT = { name:'', email:'', countryCode:'+91', phone:'', service:'', message:'', agreed:false }
 
 function Field({ id, label, error, valid, optional, children }) {
   return (
@@ -35,7 +29,9 @@ function Field({ id, label, error, valid, optional, children }) {
 
 export default function Contact() {
   usePageReveal()
+  const { showPrivacy } = usePrivacyModal()
   const [form,    setForm]    = useState(INIT)
+  const [services, setServices] = useState([])
   const [errors,  setErrors]  = useState({})
   const [touched, setTouched] = useState({})
   const [status,  setStatus]  = useState('idle') // idle|loading|success|error
@@ -51,10 +47,25 @@ export default function Contact() {
     setErrors(partial)
   }, [form, touched])
 
-  /* keep select floating label */
+  /* keep service select floating label */
   useEffect(() => {
-    formRef.current?.querySelector('select')?.classList.toggle('has-value', !!form.service)
+    formRef.current?.querySelector('select[name="service"]')?.classList.toggle('has-value', !!form.service)
   }, [form.service])
+
+  /* load services from backend */
+  useEffect(() => {
+    let mounted = true
+    ;(async () => {
+      try {
+        const list = await getServiceList()
+        if (mounted) setServices(list || [])
+      } catch (err) {
+        // silent - optionally show a non-blocking message
+        console.error('Failed to load services', err)
+      }
+    })()
+    return () => { mounted = false }
+  }, [])
 
   const onChange = e => {
     const { name, value, type, checked } = e.target
@@ -106,8 +117,8 @@ export default function Contact() {
             <div className="card reveal delay-1 text-center">
               <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>✉️</div>
               <h5 className="card-title">Email</h5>
-              <a href="mailto:sanju27586@gmail.com" className="info-link">sanju27586@gmail.com</a>
-              <a href="mailto:sanju27586@gmail.com" className="info-link" style={{ display:'block' }}>sanju27586@gmail.com</a>
+              <a href="mailto:myavi2005@gmail.com" className="info-link">myavi2005@gmail.com</a>
+              <a href="mailto:myavi2005@gmail.com" className="info-link" style={{ display:'block' }}>myavi2005@gmail.com</a>
             </div>
             <div className="card reveal delay-2 text-center">
               <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>🏢</div>
@@ -147,24 +158,32 @@ export default function Contact() {
                     </Field>
 
                     <Field id="email" label="Email Address" error={errors.email} valid={isValid('email')}>
-                      <input id="email" name="email" type="email" placeholder=" " autoComplete="email" inputMode="email"
+                      <input id="email" name="email" type="email" placeholder=" " autoComplete="email" inputMode="email" maxLength={33}
                         value={form.email} onChange={onChange} onBlur={onBlur} />
                     </Field>
 
-                    <Field id="phone" label="Phone Number" error={errors.phone} valid={isValid('phone')} optional>
-                      <input id="phone" name="phone" type="tel" placeholder=" " autoComplete="tel" inputMode="tel" maxLength={20}
+                    <Field id="countryCode" label="Country Code" error={errors.countryCode} valid={isValid('countryCode')}>
+                      <select id="countryCode" name="countryCode" value={form.countryCode} onChange={onChange} onBlur={onBlur}
+                        className={form.countryCode ? 'has-value' : ''}>
+                        {COUNTRY_CODES.map(c => <option key={c.code} value={c.code}>{c.label}</option>)}
+                      </select>
+                      <span className="select-arrow">▼</span>
+                    </Field>
+
+                    <Field id="phone" label="Phone Number" error={errors.phone} valid={isValid('phone')}>
+                      <input id="phone" name="phone" type="tel" placeholder=" " autoComplete="tel" inputMode="tel" maxLength={10}
                         value={form.phone} onChange={onChange} onBlur={onBlur} />
                     </Field>
 
-                    <Field id="company" label="Company / Organisation" error={errors.company} valid={false} optional>
-                      <input id="company" name="company" type="text" placeholder=" " autoComplete="organization" maxLength={100}
-                        value={form.company} onChange={onChange} onBlur={onBlur} />
-                    </Field>
+                    {/* Company field removed — not required for backend */}
 
                     <Field id="service" label="Service of Interest" error={errors.service} valid={isValid('service')}>
                       <select id="service" name="service" value={form.service} onChange={onChange} onBlur={onBlur}
                         className={form.service ? 'has-value' : ''}>
-                        {SERVICES.map(o => <option key={o.value} value={o.value} disabled={o.disabled}>{o.label}</option>)}
+                        <option value="" disabled>Select a service…</option>
+                        {services.map(s => (
+                          <option key={s.recId ?? s.RecId} value={s.recId ?? s.RecId}>{s.name ?? s.Name}</option>
+                        ))}
                       </select>
                       <span className="select-arrow">▼</span>
                     </Field>
@@ -185,7 +204,7 @@ export default function Contact() {
                         style={{ accentColor:'var(--accent-1)', width:16, height:16, marginTop:2, flexShrink:0 }} />
                       <label htmlFor="agreed" style={{ fontSize:'.82rem', color:'var(--text-secondary)', cursor:'pointer' }}>
                         I agree to the{' '}
-                        <Link to="#" style={{ color:'var(--accent-1)' }}>Privacy Policy</Link>{' '}
+                        <a href="#" onClick={(e)=>{ e.preventDefault(); showPrivacy() }} style={{ color:'var(--accent-1)' }}>Privacy Policy</a>{' '}
                         and consent to being contacted by CodeXClear.
                       </label>
                     </div>
@@ -222,7 +241,7 @@ export default function Contact() {
                 <h5 style={{ fontWeight:700, marginBottom:'.4rem', color:'var(--text-primary)' }}>Need faster help?</h5>
                 <p style={{ fontSize:'.85rem', color:'var(--text-secondary)', marginBottom:'1rem' }}>Call or WhatsApp us directly</p>
                 <a href="tel:+918400087325" className="btn btn-grad btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex', marginBottom:'.5rem' }}>📞 +91-8400087325</a>
-                <a href="mailto:sanju27586@gmail.com" className="btn btn-outline btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex' }}>✉️ sanju27586@gmail.com</a>
+                <a href="mailto:myavi2005@gmail.com" className="btn btn-outline btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex' }}>✉️ myavi2005@gmail.com</a>
               </div>
 
               <div className="card">

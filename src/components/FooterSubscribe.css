@@ -1,0 +1,10 @@
+.footer-subscribe{padding:8px}
+.footer-subscribe .field{margin-bottom:8px}
+.footer-subscribe label{display:block;font-size:0.9rem;margin-bottom:4px}
+.footer-subscribe input{width:100%;padding:8px;border:1px solid #ccc;border-radius:4px}
+.footer-subscribe .actions{margin-top:8px}
+.footer-subscribe button{background:#1976d2;color:#fff;padding:8px 12px;border:none;border-radius:4px;cursor:pointer}
+.footer-subscribe button[disabled]{opacity:0.6;cursor:not-allowed}
+.footer-subscribe .msg{margin-top:8px;font-size:0.95rem}
+.footer-subscribe .msg.error{color:#b00020}
+.footer-subscribe .msg.success{color:#2e7d32}
