@@ -2,7 +2,7 @@
 // In production use VITE_API_BASE_URL (or fallback to the production API).
 const BASE = import.meta.env.DEV
   ? ''
-  : (import.meta.env.VITE_API_BASE_URL ?? 'http://sanjulogin.runasp.net')
+  : (import.meta.env.VITE_API_BASE_URL ?? 'https://sanjulogin.runasp.net')
 
 /**
  * POST contact form data to .NET Core API.
