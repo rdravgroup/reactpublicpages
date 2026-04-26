@@ -1,14 +1,31 @@
-.svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-@media(max-width:991px){ .svc-grid { grid-template-columns: repeat(2,1fr); } }
-@media(max-width:575px){ .svc-grid { grid-template-columns: 1fr; } }
+.svc-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+}
+@media (max-width: 991px) { .svc-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 575px) { .svc-grid { grid-template-columns: 1fr; } }
 
-.process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; text-align: center; }
-@media(max-width:991px){ .process-grid { grid-template-columns: repeat(2,1fr); } }
-@media(max-width:575px){ .process-grid { grid-template-columns: 1fr; } }
-.process-num { width:56px; height:56px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.2rem; color:#fff; margin:0 auto 1.25rem; }
-.process-title { font-weight:700; font-size:1.05rem; margin-bottom:.5rem; color:var(--text-primary); }
-.process-desc  { font-size:.875rem; color:var(--text-secondary); line-height:1.7; }
+.process-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; text-align: center;
+}
+@media (max-width: 991px) { .process-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 575px) { .process-grid { grid-template-columns: 1fr; } }
 
-.tech-cloud { display:flex; flex-wrap:wrap; gap:.625rem; justify-content:center; margin-top:2.5rem; }
-.tech-pill { padding:8px 16px; font-size:.85rem; font-weight:500; background:var(--bg-card); border:1px solid var(--border-mid); border-radius:50px; color:var(--text-secondary); transition:all .25s; }
-.tech-pill:hover { border-color:var(--accent-1); color:var(--accent-1); }
+.process-num {
+  width: 56px; height: 56px; border-radius: 50%; background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.2rem; color: #fff; margin: 0 auto 1.25rem;
+}
+.process-title { font-weight: 700; font-size: 1rem; margin-bottom: .5rem; color: var(--text-primary); }
+.process-desc  { font-size: .875rem; color: var(--text-secondary); line-height: 1.7; }
+
+.tech-cloud {
+  display: flex; flex-wrap: wrap; gap: .625rem;
+  justify-content: center; margin-top: 2.5rem;
+}
+.tech-pill {
+  padding: 8px 16px; font-size: .85rem; font-weight: 500;
+  background: var(--bg-card); border: 1px solid var(--border-mid);
+  border-radius: 50px; color: var(--text-secondary); transition: all .25s;
+  white-space: nowrap;
+}
+.tech-pill:hover { border-color: var(--accent-1); color: var(--accent-1); }

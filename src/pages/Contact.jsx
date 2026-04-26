@@ -136,7 +136,7 @@ export default function Contact() {
 
             {/* Form */}
             <div className="reveal">
-              <div className="card" style={{ padding:'2.5rem' }}>
+              <div className="card contact-form-card">
                 <div className="section-eyebrow" style={{ marginBottom:'1rem' }}>Send a Message</div>
                 <h2 style={{ fontSize:'1.6rem', fontWeight:800, marginBottom:'.5rem', color:'var(--text-primary)' }}>
                   We'll Reply Within <span className="grad-text">24 Hours</span>
