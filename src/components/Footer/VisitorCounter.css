@@ -1,0 +1,88 @@
+/* ── VisitorCounter ── */
+.visitor-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 2px;
+}
+
+/* Stats row */
+.vc-stats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Individual stat */
+.vc-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.vc-stat__icon  { font-size: 0.8rem; line-height: 1; }
+.vc-stat__value {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+.vc-stat__label { font-size: 0.7rem; color: var(--text-muted); }
+
+/* Separator */
+.vc-sep { color: var(--border-mid); font-size: 0.9rem; }
+
+/* Online dot — pulsing green */
+.vc-online-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #4caf50;
+  flex-shrink: 0;
+  animation: vcPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+@keyframes vcPulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(76,175,80,.2); }
+  50%       { box-shadow: 0 0 0 5px rgba(76,175,80,.08); }
+}
+
+/* Local fallback badge */
+.vc-local-badge {
+  font-size: 0.6rem; font-weight: 700;
+  padding: 1px 6px; border-radius: 50px;
+  background: rgba(245,166,35,.15);
+  color: #f5a623;
+  border: 1px solid rgba(245,166,35,.25);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* Skeleton loader */
+.vc-skeleton {
+  display: flex; align-items: center; gap: 8px;
+}
+.vc-skeleton__dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--border-mid);
+  animation: vcShimmer 1.4s ease-in-out infinite;
+}
+.vc-skeleton__bar {
+  height: 12px; border-radius: 6px;
+  background: var(--border-mid);
+  animation: vcShimmer 1.4s ease-in-out infinite;
+}
+@keyframes vcShimmer {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .vc-stats { gap: 7px; }
+  .vc-stat  { gap: 4px; }
+  .vc-stat__label { display: none; } /* compact on tiny screens */
+}

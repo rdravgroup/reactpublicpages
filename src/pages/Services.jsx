@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import './Services.css'
+import { useSEO, SEO_PAGES } from '../hooks/useSEO.js'
 
 const SVCS = [
   { id:'consulting',   icon:'💼', title:'IT Consulting',       tags:['Strategy','Architecture','Roadmapping'],    desc:'Technology roadmapping, architecture design, and digital transformation advisory. We help you make the right decisions — from stack selection to cloud migration.' },
@@ -24,6 +25,7 @@ const STEPS = [
 
 export default function Services() {
   usePageReveal()
+  useSEO(SEO_PAGES.services)
   return (
     <div>
       <section className="page-hero">

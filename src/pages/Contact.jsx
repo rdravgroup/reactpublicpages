@@ -5,6 +5,7 @@ import { validateContact } from '../utils/validation.js'
 import { sendContactForm, getServiceList } from '../utils/contactApi.js'
 import { usePrivacyModal } from '../context/PrivacyModalContext.jsx'
 import './Contact.css'
+import { useSEO, SEO_PAGES } from '../hooks/useSEO.js'
 
 const COUNTRY_CODES = [
   { code:'+91', label:'India (+91)' },
@@ -29,6 +30,7 @@ function Field({ id, label, error, valid, optional, children }) {
 
 export default function Contact() {
   usePageReveal()
+  useSEO(SEO_PAGES.contact)
   const { showPrivacy } = usePrivacyModal()
   const [form,    setForm]    = useState(INIT)
   const [services, setServices] = useState([])
@@ -136,7 +138,7 @@ export default function Contact() {
 
             {/* Form */}
             <div className="reveal">
-              <div className="card contact-form-card">
+              <div className="card" style={{ padding:'2.5rem' }}>
                 <div className="section-eyebrow" style={{ marginBottom:'1rem' }}>Send a Message</div>
                 <h2 style={{ fontSize:'1.6rem', fontWeight:800, marginBottom:'.5rem', color:'var(--text-primary)' }}>
                   We'll Reply Within <span className="grad-text">24 Hours</span>

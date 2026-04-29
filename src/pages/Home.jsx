@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import { useCounter } from '../hooks/useCounter.js'
 import './Home.css'
+import { useSEO, SEO_PAGES } from '../hooks/useSEO.js'
 
 const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://login.codexclear.com/login?app=invoice'
 const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://login.codexclear.com/login?app=music'
@@ -35,6 +36,7 @@ function Stat({ target, suffix, label }) {
 
 export default function Home() {
   usePageReveal()
+  useSEO(SEO_PAGES.home)
 
   return (
     <div className="home">

@@ -24,27 +24,20 @@ export default function Navbar() {
   const [themeOpen,  setThemeOpen]  = useState(false)
   const themeRef = useRef(null)
 
-  // Scroll detection
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close everything on route change
   useEffect(() => {
-    setMobileOpen(false)
-    setMobSub(null)
-    setThemeOpen(false)
+    setMobileOpen(false); setMobSub(null); setThemeOpen(false)
     document.body.style.overflow = ''
   }, [location])
 
-  // Close theme panel on outside click
   useEffect(() => {
     const handler = (e) => {
-      if (themeRef.current && !themeRef.current.contains(e.target)) {
-        setThemeOpen(false)
-      }
+      if (themeRef.current && !themeRef.current.contains(e.target)) setThemeOpen(false)
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
@@ -52,272 +45,193 @@ export default function Navbar() {
 
   const toggleMobile = useCallback(() => {
     setMobileOpen(prev => {
-      const next = !prev
-      document.body.style.overflow = next ? 'hidden' : ''
-      return next
+      document.body.style.overflow = prev ? '' : 'hidden'
+      return !prev
     })
     setMobSub(null)
   }, [])
 
-  const activeClass = ({ isActive }) => (isActive ? 'active' : undefined)
+  const active = ({ isActive }) => isActive ? 'active' : undefined
 
   return (
     <>
-      {/* ── NAVBAR ── */}
-      <nav
-        className={`navbar${scrolled ? ' scrolled' : ''}`}
-        aria-label="Main navigation"
-        role="navigation"
-      >
+      <nav className={`navbar${scrolled ? ' scrolled' : ''}`} aria-label="Main navigation">
         <div className="navbar__inner">
 
-          {/* Brand — takes left, margin-right:auto pushes rest to the right */}
+          {/* ── BRAND (margin-right:auto pushes everything else right) ── */}
           <Link to="/" className="navbar__brand" aria-label="CodeXClear home">
-            <img src={logoIcon} alt="" className="navbar__logo" aria-hidden="true" />
-            <span className="navbar__name">
-              Code<span className="x">X</span>Clear
-            </span>
+            <img src={logoIcon} alt="CodeXClear" className="navbar__logo" />
+            <span className="navbar__name">Code<span className="x">X</span>Clear</span>
           </Link>
 
-          {/* ── DESKTOP MENU (hidden on ≤991px via CSS) ── */}
+          {/* ── DESKTOP MENU ── */}
           <ul className="navbar__menu" role="menubar">
-            <li role="none">
-              <NavLink to="/" end className={activeClass} role="menuitem">Home</NavLink>
-            </li>
+            <li><NavLink to="/" end className={active}>Home</NavLink></li>
 
-            <li role="none">
-              <NavLink to="/services" className={activeClass} role="menuitem">
-                Services <span className="chevron">▾</span>
-              </NavLink>
+            <li>
+              <NavLink to="/services" className={active}>Services <span className="chevron">▾</span></NavLink>
               <div className="dropdown dropdown--mega" role="menu">
                 <div className="mega-col">
                   <div className="mega-heading">IT Services</div>
-                  {[
-                    ['💼','IT Consulting',       'Strategy & architecture',  '/services#consulting'],
-                    ['⚙️','Software Engineering','Angular + .NET Core',      '/services#development'],
-                    ['☁️','Cloud & DevOps',       'AWS, Azure, CI/CD',        '/services#cloud'],
-                    ['🔒','Cybersecurity',        'Audits & compliance',      '/services#security'],
-                  ].map(([icon, label, desc, to]) => (
-                    <NavLink key={label} to={to} role="menuitem">
-                      <span className="dd-icon">{icon}</span>
-                      <span>
-                        <span className="dd-label">{label}</span>
-                        <span className="dd-desc">{desc}</span>
-                      </span>
+                  {[['💼','IT Consulting','Strategy & architecture','/services#consulting'],
+                    ['⚙️','Software Engineering','Angular + .NET Core','/services#development'],
+                    ['☁️','Cloud & DevOps','AWS, Azure, CI/CD','/services#cloud'],
+                    ['🔒','Cybersecurity','Audits & compliance','/services#security'],
+                  ].map(([i,l,d,to]) => (
+                    <NavLink to={to} key={l}>
+                      <span className="dd-icon">{i}</span>
+                      <span><span className="dd-label">{l}</span><span className="dd-desc">{d}</span></span>
                     </NavLink>
                   ))}
                 </div>
                 <div className="mega-col">
                   <div className="mega-heading">Enterprise</div>
-                  {[
-                    ['🏢','ERP Solutions',   'Business management',  '/services#erp'],
-                    ['🔗','API Integration', 'Connect your systems', '/services#integration'],
-                    ['🛡️','Managed Support', '24/7 monitoring',      '/services#support'],
-                    ['🎓','Training',        'Upskill your team',    '/services#training'],
-                  ].map(([icon, label, desc, to]) => (
-                    <NavLink key={label} to={to} role="menuitem">
-                      <span className="dd-icon">{icon}</span>
-                      <span>
-                        <span className="dd-label">{label}</span>
-                        <span className="dd-desc">{desc}</span>
-                      </span>
+                  {[['🏢','ERP Solutions','Business management','/services#erp'],
+                    ['🔗','API Integration','Connect your systems','/services#integration'],
+                    ['🛡️','Managed Support','24/7 monitoring','/services#support'],
+                    ['🎓','Training','Upskill your team','/services#training'],
+                  ].map(([i,l,d,to]) => (
+                    <NavLink to={to} key={l}>
+                      <span className="dd-icon">{i}</span>
+                      <span><span className="dd-label">{l}</span><span className="dd-desc">{d}</span></span>
                     </NavLink>
                   ))}
                 </div>
               </div>
             </li>
 
-            <li role="none">
-              <NavLink to="/products" className={activeClass} role="menuitem">
-                Products <span className="chevron">▾</span>
-              </NavLink>
+            <li>
+              <NavLink to="/products" className={active}>Products <span className="chevron">▾</span></NavLink>
               <div className="dropdown" style={{ minWidth: 260 }} role="menu">
-                <a href={INVOICE_URL} target="_blank" rel="noopener noreferrer" role="menuitem">
+                <a href={INVOICE_URL} target="_blank" rel="noopener noreferrer">
                   <span className="dd-icon">🧾</span>
-                  <span>
-                    <span className="dd-label">Invoice Manager</span>
-                    <span className="dd-desc">Live · Angular + .NET</span>
-                  </span>
+                  <span><span className="dd-label">Invoice Manager</span><span className="dd-desc">Live · Angular + .NET</span></span>
                 </a>
-                <a href={MUSIC_URL} target="_blank" rel="noopener noreferrer" role="menuitem">
+                <a href={MUSIC_URL} target="_blank" rel="noopener noreferrer">
                   <span className="dd-icon">🎵</span>
-                  <span>
-                    <span className="dd-label">Music App</span>
-                    <span className="dd-desc">Free · Beta</span>
-                  </span>
+                  <span><span className="dd-label">Music App</span><span className="dd-desc">Free · Beta</span></span>
                 </a>
                 <hr className="dd-divider" />
-                {[
-                  ['💍','Shadi Portal',  '/products#shadi'],
-                  ['🚗','CX Ride',       '/products#ride'],
-                  ['🏷️','CX Classifieds','/products#olex'],
-                  ['🏠','CX Housing',   '/products#housing'],
-                ].map(([icon, label, to]) => (
-                  <NavLink key={label} to={to} role="menuitem">
-                    <span className="dd-icon">{icon}</span>
-                    <span>
-                      <span className="dd-label">{label}</span>
-                      <span className="dd-desc">Coming Soon</span>
-                    </span>
+                {[['💍','Shadi Portal','/products#shadi'],['🚗','CX Ride','/products#ride'],
+                  ['🏷️','CX Classifieds','/products#olex'],['🏠','CX Housing','/products#housing'],
+                ].map(([i,l,to]) => (
+                  <NavLink to={to} key={l}>
+                    <span className="dd-icon">{i}</span>
+                    <span><span className="dd-label">{l}</span><span className="dd-desc">Coming Soon</span></span>
                   </NavLink>
                 ))}
               </div>
             </li>
 
-            <li role="none"><NavLink to="/about"   className={activeClass} role="menuitem">About</NavLink></li>
-            <li role="none"><NavLink to="/blog"    className={activeClass} role="menuitem">Blog</NavLink></li>
-            <li role="none"><NavLink to="/contact" className={activeClass} role="menuitem">Contact</NavLink></li>
+            <li><NavLink to="/about"   className={active}>About</NavLink></li>
+            <li><NavLink to="/blog"    className={active}>Blog</NavLink></li>
+            <li><NavLink to="/contact" className={active}>Contact</NavLink></li>
           </ul>
 
-          {/* ── DESKTOP ACTIONS (hidden on ≤991px via CSS) ── */}
-          <div className="navbar__actions" aria-label="Account actions">
-            {/* Theme switcher — desktop only */}
+          {/* ── DESKTOP ACTIONS (hidden ≤991px) ── */}
+          <div className="navbar__actions">
             <div className="theme-switcher" ref={themeRef}>
-              <button
-                className="theme-toggle"
-                onClick={() => setThemeOpen(o => !o)}
-                aria-label="Change colour theme"
-                aria-expanded={themeOpen}
-                aria-haspopup="listbox"
-              >
-                🎨
-              </button>
+              <button className="theme-toggle" onClick={() => setThemeOpen(o => !o)}
+                aria-label="Change colour theme" aria-expanded={themeOpen}>🎨</button>
               {themeOpen && (
-                <div className="theme-panel" role="listbox" aria-label="Theme options">
+                <div className="theme-panel" role="listbox">
                   <div className="theme-panel__title">Choose Theme</div>
                   {THEMES.map(t => (
-                    <button
-                      key={t.key}
+                    <button key={t.key}
                       className={`theme-btn${theme === t.key ? ' active' : ''}`}
                       onClick={() => { setTheme(t.key); setThemeOpen(false) }}
-                      role="option"
-                      aria-selected={theme === t.key}
-                    >
-                      <span className={`swatch ${t.swatch}`} />
-                      {t.label}
+                      role="option" aria-selected={theme === t.key}>
+                      <span className={`swatch ${t.swatch}`} />{t.label}
                     </button>
                   ))}
                 </div>
               )}
             </div>
+            <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="nav-btn-ghost">Sign In</a>
+            <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="nav-btn-fill">Get Started</a>
+          </div>
 
+          {/* ── MOBILE RIGHT CLUSTER ──
+              Sign In button is always visible on mobile (top-right, next to hamburger).
+              This gives users instant access without opening the drawer.
+          ── */}
+          <div className="navbar__mobile-right">
             <a
               href={LOGIN_URL}
               target="_blank" rel="noopener noreferrer"
-              className="nav-btn-ghost"
+              className="mob-signin-btn"
+              aria-label="Sign in to CodeXClear"
             >
               Sign In
             </a>
-            <a
-              href={REGISTER_URL}
-              target="_blank" rel="noopener noreferrer"
-              className="nav-btn-fill"
+            <button
+              className={`hamburger${mobileOpen ? ' open' : ''}`}
+              onClick={toggleMobile}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-drawer"
+              type="button"
             >
-              Get Started
-            </a>
+              <span /><span /><span />
+            </button>
           </div>
-
-          {/* ── HAMBURGER (shown on ≤991px via CSS) ──
-              ALWAYS rendered, ALWAYS last child in flex row.
-              Never hidden by display:none from parent — it controls itself.
-          */}
-          <button
-            className={`hamburger${mobileOpen ? ' open' : ''}`}
-            onClick={toggleMobile}
-            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-drawer"
-            type="button"
-          >
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </button>
         </div>
       </nav>
 
       {/* ── MOBILE DRAWER ── */}
-      <div
-        id="mobile-drawer"
+      <div id="mobile-drawer"
         className={`mobile-drawer${mobileOpen ? ' open' : ''}`}
-        aria-hidden={!mobileOpen}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Navigation menu"
-      >
-        {/* Home */}
-        <NavLink
-          to="/"
-          className={({ isActive }) => `mob-link${isActive ? ' active' : ''}`}
-          onClick={() => setMobileOpen(false)}
-        >
+        aria-hidden={!mobileOpen}>
+
+        <NavLink to="/" className={({ isActive }) => `mob-link${isActive ? ' active' : ''}`}
+          onClick={() => setMobileOpen(false)}>
           🏠 &nbsp;Home
         </NavLink>
 
-        {/* Services accordion */}
-        <div className="mob-group">
-          <div
-            className="mob-toggle"
-            onClick={() => setMobSub(s => s === 'services' ? null : 'services')}
-            role="button" tabIndex={0}
-            onKeyDown={e => e.key === 'Enter' && setMobSub(s => s === 'services' ? null : 'services')}
-            aria-expanded={mobSub === 'services'}
-          >
-            Services
-            <span>{mobSub === 'services' ? '▴' : '▾'}</span>
-          </div>
-          <div className={`mob-sub${mobSub === 'services' ? ' open' : ''}`}>
-            {[
-              ['/services#consulting',  '💼', 'IT Consulting'],
-              ['/services#development', '⚙️', 'Software Engineering'],
-              ['/services#cloud',       '☁️', 'Cloud & DevOps'],
-              ['/services#erp',         '🏢', 'ERP Solutions'],
-              ['/services#security',    '🔒', 'Cybersecurity'],
-            ].map(([to, icon, label]) => (
-              <NavLink key={label} to={to} onClick={() => setMobileOpen(false)}>
-                <span>{icon}</span> {label}
-              </NavLink>
-            ))}
-          </div>
-        </div>
-
-        {/* Products accordion */}
-        <div className="mob-group">
-          <div
-            className="mob-toggle"
-            onClick={() => setMobSub(s => s === 'products' ? null : 'products')}
-            role="button" tabIndex={0}
-            onKeyDown={e => e.key === 'Enter' && setMobSub(s => s === 'products' ? null : 'products')}
-            aria-expanded={mobSub === 'products'}
-          >
-            Products
-            <span>{mobSub === 'products' ? '▴' : '▾'}</span>
-          </div>
-          <div className={`mob-sub${mobSub === 'products' ? ' open' : ''}`}>
-            <a href={INVOICE_URL} target="_blank" rel="noopener noreferrer">
-              <span>🧾</span> Invoice Manager
-            </a>
-            <a href={MUSIC_URL} target="_blank" rel="noopener noreferrer">
-              <span>🎵</span> Music App
-            </a>
-            <NavLink to="/products#shadi" onClick={() => setMobileOpen(false)}><span>💍</span> Shadi Portal</NavLink>
-            <NavLink to="/products#ride"  onClick={() => setMobileOpen(false)}><span>🚗</span> CX Ride</NavLink>
-            <NavLink to="/products"       onClick={() => setMobileOpen(false)}><span>📦</span> All Products</NavLink>
-          </div>
-        </div>
-
-        {/* Flat links */}
         {[
-          ['/about',   '👥', 'About'],
-          ['/blog',    '📝', 'Blog'],
-          ['/contact', '✉️', 'Contact'],
-        ].map(([to, icon, label]) => (
-          <NavLink
-            key={to} to={to}
+          { key:'services', label:'Services', links:[
+            ['/services#consulting','💼','IT Consulting'],
+            ['/services#development','⚙️','Software Engineering'],
+            ['/services#cloud','☁️','Cloud & DevOps'],
+            ['/services#erp','🏢','ERP Solutions'],
+            ['/services#security','🔒','Cybersecurity'],
+          ]},
+          { key:'products', label:'Products', links:[
+            [INVOICE_URL,'🧾','Invoice Manager',true],
+            [MUSIC_URL,'🎵','Music App',true],
+            ['/products#shadi','💍','Shadi Portal'],
+            ['/products#ride','🚗','CX Ride'],
+            ['/products','📦','All Products'],
+          ]},
+        ].map(g => (
+          <div className="mob-group" key={g.key}>
+            <div className="mob-toggle"
+              onClick={() => setMobSub(s => s === g.key ? null : g.key)}
+              role="button" tabIndex={0}
+              onKeyDown={e => e.key === 'Enter' && setMobSub(s => s === g.key ? null : g.key)}
+              aria-expanded={mobSub === g.key}>
+              {g.label} <span>{mobSub === g.key ? '▴' : '▾'}</span>
+            </div>
+            <div className={`mob-sub${mobSub === g.key ? ' open' : ''}`}>
+              {g.links.map(([href, icon, label, ext]) =>
+                ext
+                  ? <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                       onClick={() => setMobileOpen(false)}>
+                      <span>{icon}</span> {label}
+                    </a>
+                  : <NavLink key={label} to={href} onClick={() => setMobileOpen(false)}>
+                      <span>{icon}</span> {label}
+                    </NavLink>
+              )}
+            </div>
+          </div>
+        ))}
+
+        {[['/about','👥','About'],['/blog','📝','Blog'],['/contact','✉️','Contact']].map(([to,ic,lb]) => (
+          <NavLink key={to} to={to}
             className={({ isActive }) => `mob-link${isActive ? ' active' : ''}`}
-            onClick={() => setMobileOpen(false)}
-          >
-            {icon} &nbsp;{label}
+            onClick={() => setMobileOpen(false)}>
+            {ic} &nbsp;{lb}
           </NavLink>
         ))}
 
@@ -327,49 +241,31 @@ export default function Navbar() {
         <div className="mob-theme-label">Choose Theme</div>
         <div className="mob-theme-row">
           {THEMES.map(t => (
-            <button
-              key={t.key}
+            <button key={t.key}
               className={`theme-btn${theme === t.key ? ' active' : ''}`}
-              onClick={() => setTheme(t.key)}
-              aria-pressed={theme === t.key}
-            >
+              onClick={() => setTheme(t.key)} aria-pressed={theme === t.key}>
               <span className={`swatch ${t.swatch}`} />
               {t.label.split(' ')[0]}
             </button>
           ))}
         </div>
 
-        {/* Auth CTAs */}
+        {/* Auth CTAs in drawer */}
         <div className="mob-actions">
-          <a
-            href={LOGIN_URL} target="_blank" rel="noopener noreferrer"
-            className="nav-btn-ghost"
-            onClick={() => setMobileOpen(false)}
-          >
+          <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer"
+            className="nav-btn-ghost" onClick={() => setMobileOpen(false)}>
             Sign In
           </a>
-          <a
-            href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
-            className="nav-btn-fill"
-            onClick={() => setMobileOpen(false)}
-          >
+          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+            className="nav-btn-fill" onClick={() => setMobileOpen(false)}>
             Register Free
           </a>
         </div>
       </div>
 
-      {/* Backdrop overlay on mobile */}
+      {/* Backdrop */}
       {mobileOpen && (
-        <div
-          aria-hidden="true"
-          onClick={toggleMobile}
-          style={{
-            position: 'fixed', inset: 0,
-            background: 'rgba(0,0,0,.4)',
-            zIndex: 998,
-            backdropFilter: 'blur(2px)',
-          }}
-        />
+        <div aria-hidden="true" onClick={toggleMobile} className="drawer-backdrop" />
       )}
     </>
   )

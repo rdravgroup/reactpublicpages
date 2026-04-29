@@ -4,6 +4,7 @@ import { subscribeNewsletter } from '../../utils/contactApi.js'
 import { usePrivacyModal } from '../../context/PrivacyModalContext.jsx'
 import logoFull from '../../assets/logo-full.png'
 import './Footer.css'
+import VisitorCounter from './VisitorCounter.jsx'
 
 const INVOICE_URL = import.meta.env.VITE_INVOICE_APP_URL || 'https://login.codexclear.com/login?app=invoice'
 const MUSIC_URL   = import.meta.env.VITE_MUSIC_APP_URL   || 'https://login.codexclear.com/login?app=music'
@@ -138,12 +139,18 @@ export default function Footer() {
         </div>
 
         <div className="footer__bottom">
+          {/* Visitor counter — full width row above copyright */}
+          <div className="footer__counter-row">
+            <VisitorCounter />
+          </div>
+          <div className="footer__bottom-bar">
           <p className="footer__copy">© 2025 CodeXClear.com · All rights reserved. · Lucknow, UP, India</p>
           <div className="footer__legal">
             <a href="#" onClick={(e)=>{ e.preventDefault(); showPrivacy() }}>Privacy Policy</a>
             <Link to="#">Terms of Service</Link>
             <Link to="#">Cookies</Link>
           </div>
+          </div>{/* end footer__bottom-bar */}
         </div>
       </div>
     </footer>

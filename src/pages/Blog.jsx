@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import './Blog.css'
+import { useSEO, SEO_PAGES } from '../hooks/useSEO.js'
 
 const CATS = ['all','engineering','product','devops','company']
 
@@ -16,6 +17,7 @@ const POSTS = [
 
 export default function Blog() {
   usePageReveal()
+  useSEO(SEO_PAGES.blog)
   const [cat, setCat]       = useState('all')
   const [email, setEmail]   = useState('')
   const [subOk, setSubOk]   = useState(false)

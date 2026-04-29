@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://codexclear.com/sitemap.xml
+
+# Block irrelevant paths
+Disallow: /unsubscribe
+Disallow: /search?

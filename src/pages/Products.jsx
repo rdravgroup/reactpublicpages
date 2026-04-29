@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import './Products.css'
+import { useSEO, SEO_PAGES } from '../hooks/useSEO.js'
 
 const INVOICE_URL  = import.meta.env.VITE_INVOICE_APP_URL || 'https://login.codexclear.com/login?app=invoice'
 const MUSIC_URL    = import.meta.env.VITE_MUSIC_APP_URL   || 'https://login.codexclear.com/login?app=music'
@@ -23,6 +24,7 @@ const COMING = [
 
 export default function Products() {
   usePageReveal()
+  useSEO(SEO_PAGES.products)
   const [notified, setNotified] = useState({})
   const notify = (id) => { setNotified(p => ({ ...p, [id]: true })); setTimeout(() => setNotified(p => ({ ...p, [id]: false })), 3000) }
 

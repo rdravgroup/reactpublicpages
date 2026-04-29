@@ -48,3 +48,39 @@ address.footer__address a:hover { text-decoration: underline; }
 
 .sub-ok  { font-size: .8rem; color: #4caf50; margin-top: .5rem; }
 .sub-err { font-size: .8rem; color: #f44336; margin-top: .5rem; }
+
+/* ── VISITOR COUNTER FOOTER INTEGRATION ── */
+.footer__bottom {
+  /* Stack: counter row on top, then copyright bar below */
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-mid);
+}
+
+.footer__counter-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-mid);
+  margin-bottom: 10px;
+}
+
+.footer__bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+@media (max-width: 575px) {
+  .footer__bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+  }
+}

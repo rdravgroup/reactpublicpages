@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import { useCounter } from '../hooks/useCounter.js'
 import './About.css'
+import { useSEO, SEO_PAGES } from '../hooks/useSEO.js'
 
 const VALUES = [
   { icon:'🎯', t:'Clarity First',   d:'We explain everything in plain language. No jargon, no surprises — just clear outcomes at every step.' },
@@ -27,6 +28,7 @@ function Stat({ target, suffix, label }) {
 
 export default function About() {
   usePageReveal()
+  useSEO(SEO_PAGES.about)
   return (
     <div>
       <section className="page-hero">
