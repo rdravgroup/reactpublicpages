@@ -11,7 +11,6 @@ const SITE = {
   url:         'https://codexclear.com',
   altUrl:      'https://d2digit.com',         // future domain
   logo:        'https://codexclear.com/logo.png',
-  phone:       '+918400087325',
   email:       'info@codexclear.com',
   address: {
     street:    'KH179 Anand Puram, STP Chauraha, Gomtinagar Extension',
@@ -255,7 +254,7 @@ export const SEO_PAGES = {
 
   contact: {
     title:       'Contact CodeXClear — IT Services & Free Consultation',
-    description: 'Contact CodeXClear for IT consulting, software development, invoice billing systems, ERP solutions, or website creation in Lucknow, India. Free consultation. Call +91-8400087325.',
+    description: 'Contact CodeXClear for IT consulting, software development, invoice billing systems, ERP solutions, or website creation in Lucknow, India. Free consultation.',
     path:        '/contact',
     keywords:    [
       'contact CodeXClear','IT company contact Lucknow',
@@ -266,14 +265,13 @@ export const SEO_PAGES = {
     schemaType:  'ContactPage',
     extraSchema: {
       mainEntity: {
-        '@type':     'LocalBusiness',
-        name:        'CodeXClear',
-        image:       'https://codexclear.com/logo.png',
-        telephone:   '+918400087325',
-        email:       'info@codexclear.com',
-        priceRange:  '₹₹',
-        openingHours:'Mo-Sa 09:00-19:00',
-        address: {
+      '@type':     'LocalBusiness',
+      name:        'CodeXClear',
+      image:       'https://codexclear.com/logo.png',
+      email:       'info@codexclear.com',
+      priceRange:  '₹₹',
+      openingHours:'Mo-Sa 09:00-19:00',
+      address: {
           '@type':         'PostalAddress',
           streetAddress:   'KH179 Anand Puram, STP Chauraha, Gomtinagar Extension',
           addressLocality: 'Lucknow',

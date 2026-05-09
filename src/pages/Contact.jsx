@@ -113,14 +113,12 @@ export default function Contact() {
             <div className="card reveal text-center">
               <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>📞</div>
               <h5 className="card-title">Call / WhatsApp</h5>
-              <a href="tel:+918400087325" className="info-link">+91-8400087325</a>
               <p style={{ fontSize:'.78rem', color:'var(--text-muted)', marginTop:'.3rem' }}>Mon–Sat, 9am–7pm IST</p>
             </div>
             <div className="card reveal delay-1 text-center">
               <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>✉️</div>
               <h5 className="card-title">Email</h5>
-              <a href="mailto:myavi2005@gmail.com" className="info-link">myavi2005@gmail.com</a>
-              <a href="mailto:myavi2005@gmail.com" className="info-link" style={{ display:'block' }}>myavi2005@gmail.com</a>
+              <a href="mailto:rdravgroup@gmail.com" className="info-link" style={{ display:'block' }}>rdravgroup@gmail.com</a>
             </div>
             <div className="card reveal delay-2 text-center">
               <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>🏢</div>
@@ -242,8 +240,7 @@ export default function Contact() {
                 <div style={{ fontSize:'2rem', marginBottom:'.75rem' }}>📞</div>
                 <h5 style={{ fontWeight:700, marginBottom:'.4rem', color:'var(--text-primary)' }}>Need faster help?</h5>
                 <p style={{ fontSize:'.85rem', color:'var(--text-secondary)', marginBottom:'1rem' }}>Call or WhatsApp us directly</p>
-                <a href="tel:+918400087325" className="btn btn-grad btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex', marginBottom:'.5rem' }}>📞 +91-8400087325</a>
-                <a href="mailto:myavi2005@gmail.com" className="btn btn-outline btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex' }}>✉️ myavi2005@gmail.com</a>
+                <a href="mailto:rdravgroup@gmail.com" className="btn btn-outline btn-sm" style={{ width:'100%', justifyContent:'center', display:'flex' }}>✉️ rdravgroup@gmail.com</a>
               </div>
 
               <div className="card">

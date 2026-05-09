@@ -103,11 +103,11 @@ export default function Navbar() {
             <li>
               <NavLink to="/products" className={active}>Products <span className="chevron">▾</span></NavLink>
               <div className="dropdown" style={{ minWidth: 260 }} role="menu">
-                <a href={INVOICE_URL} target="_blank" rel="noopener noreferrer">
+                <a href={INVOICE_URL} target="_self" rel="noopener noreferrer">
                   <span className="dd-icon">🧾</span>
                   <span><span className="dd-label">Invoice Manager</span><span className="dd-desc">Live · Angular + .NET</span></span>
                 </a>
-                <a href={MUSIC_URL} target="_blank" rel="noopener noreferrer">
+                <a href={MUSIC_URL} target="_self" rel="noopener noreferrer">
                   <span className="dd-icon">🎵</span>
                   <span><span className="dd-label">Music App</span><span className="dd-desc">Free · Beta</span></span>
                 </a>
@@ -147,8 +147,8 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="nav-btn-ghost">Sign In</a>
-            <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="nav-btn-fill">Get Started</a>
+            <a href={LOGIN_URL} target="_self" rel="noopener noreferrer" className="nav-btn-ghost">Sign In</a>
+            <a href={REGISTER_URL} target="_self" rel="noopener noreferrer" className="nav-btn-fill">Get Started</a>
           </div>
 
           {/* ── MOBILE RIGHT CLUSTER ──
@@ -158,7 +158,7 @@ export default function Navbar() {
           <div className="navbar__mobile-right">
             <a
               href={LOGIN_URL}
-              target="_blank" rel="noopener noreferrer"
+              target="_self" rel="noopener noreferrer"
               className="mob-signin-btn"
               aria-label="Sign in to CodeXClear"
             >
@@ -215,7 +215,7 @@ export default function Navbar() {
             <div className={`mob-sub${mobSub === g.key ? ' open' : ''}`}>
               {g.links.map(([href, icon, label, ext]) =>
                 ext
-                  ? <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                  ? <a key={label} href={href} target="_self" rel="noopener noreferrer"
                        onClick={() => setMobileOpen(false)}>
                       <span>{icon}</span> {label}
                     </a>
@@ -252,11 +252,11 @@ export default function Navbar() {
 
         {/* Auth CTAs in drawer */}
         <div className="mob-actions">
-          <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer"
+          <a href={LOGIN_URL} target="_self" rel="noopener noreferrer"
             className="nav-btn-ghost" onClick={() => setMobileOpen(false)}>
             Sign In
           </a>
-          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+          <a href={REGISTER_URL} target="_self" rel="noopener noreferrer"
             className="nav-btn-fill" onClick={() => setMobileOpen(false)}>
             Register Free
           </a>

@@ -57,11 +57,7 @@ export default function Footer() {
             </Link>
             <p className="footer__tagline">
               Modern IT services and digital products — delivered with clarity from Lucknow, UP, India.<br />
-              <a href="tel:+918400087325">+91-8400087325</a>
-              {' · '}
-              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a>
-              {' · '}
-              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a>
+              <a href="mailto:rdravgroup@gmail.com">rdravgroup@gmail.com</a>
             </p>
             <div className="footer__socials">
               {SOCIALS.map(s => (
@@ -101,11 +97,7 @@ export default function Footer() {
               KH179 Anand Puram, STP Chauraha<br />
               Gomtinagar Extension<br />
               Lucknow – 226010, UP, India<br />
-              <a href="tel:+918400087325">+91-8400087325</a><br />
-              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a><br />
-              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a><br />
-              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a><br />
-              <a href="mailto:myavi2005@gmail.com">myavi2005@gmail.com</a>
+              <a href="mailto:rdravgroup@gmail.com">rdravgroup@gmail.com</a>
             </address>
 
             <h6 className="footer__heading" style={{ marginTop: '1.5rem' }}>Stay Updated</h6>
