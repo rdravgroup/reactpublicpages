@@ -67,6 +67,7 @@
   --lightbox-btn-bg: rgba(255,255,255,0.04);
   --lightbox-btn-border: rgba(255,255,255,0.12);
   --lightbox-btn-text: var(--md-on-surface);
+  --lightbox-desc-text: rgba(255,255,255,0.88);
 }
 
 /* ── PURPLE AURORA ── */
@@ -102,6 +103,7 @@
   --lightbox-btn-bg: rgba(255,255,255,0.04);
   --lightbox-btn-border: rgba(255,255,255,0.12);
   --lightbox-btn-text: var(--md-on-surface);
+  --lightbox-desc-text: rgba(255,255,255,0.88);
 }
 
 /* ── ARCTIC LIGHT ── */
@@ -138,6 +140,7 @@
   --lightbox-btn-bg: rgba(0,0,0,0.06);
   --lightbox-btn-border: rgba(0,0,0,0.12);
   --lightbox-btn-text: var(--md-on-surface);
+  --lightbox-desc-text: rgba(14,27,42,0.88);
 }
 
 /* ── RESET (override Bootstrap base) ── */

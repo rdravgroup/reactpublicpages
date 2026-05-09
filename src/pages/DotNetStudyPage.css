@@ -80,6 +80,13 @@
   border-color: var(--accent-1);
 }
 
+/* Ensure button text is visible (disable gradient/transparent text-fill) inside the lightbox */
+.dotnet-lightbox .btn,
+.dotnet-lightbox .btn * {
+  color: var(--lightbox-btn-text, var(--md-on-surface, #fff)) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
 @media (max-width: 640px) {
   .thumb-img { height: 130px; }
   .cards-grid { gap: 12px; }
@@ -96,9 +103,16 @@
 .results-count { margin-top: 8px; color: var(--text-secondary); font-size: .9rem }
 .no-results { margin-top: 12px; color: var(--text-secondary); text-align: center }
 
-.lightbox-desc { padding: 8px 12px; color: var(--md-on-surface, #fff); max-width: 96vw; }
-.lightbox-desc h3 { margin: 0 0 6px 0; color: var(--md-on-surface, #fff); font-size: 1.05rem }
-.lightbox-desc p { margin: 0; color: rgba(255,255,255,0.88); line-height: 1.5 }
+.lightbox-desc { padding: 8px 12px; color: var(--lightbox-desc-text, var(--md-on-surface, #fff)); max-width: 96vw; }
+.lightbox-desc h3 { margin: 0 0 6px 0; color: var(--lightbox-desc-heading, var(--md-on-surface, #fff)); font-size: 1.05rem }
+.lightbox-desc p { margin: 0; color: var(--lightbox-desc-text, var(--md-on-surface, #fff)); line-height: 1.5 }
+
+/* Ensure description text is visible inside the lightbox (override gradients/transparent text-fill) */
+.dotnet-lightbox .lightbox-desc,
+.dotnet-lightbox .lightbox-desc * {
+  color: var(--lightbox-desc-text, var(--md-on-surface, #fff)) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
 
 /* Fullscreen tweaks */
 .dotnet-lightbox:fullscreen .dotnet-lightbox-inner,
