@@ -15,6 +15,7 @@ const About    = lazy(() => import('./pages/About.jsx'))
 const Blog     = lazy(() => import('./pages/Blog.jsx'))
 const Contact  = lazy(() => import('./pages/Contact.jsx'))
 const ReactStudy = lazy(() => import('./pages/ReactStudyPage.jsx'))
+const DotNetStudy = lazy(() => import('./pages/DotNetStudyPage.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 const Unsubscribe = lazy(() => import('./pages/Unsubscribe.jsx'))
 const Privacy  = lazy(() => import('./pages/Privacy.jsx'))
@@ -44,6 +45,7 @@ export default function App() {
                 <Route path="/blog"     element={<Blog />} />
                 <Route path="/study"    element={<ReactStudy />} />
                 <Route path="/study/react" element={<ReactStudy />} />
+                <Route path="/study/dotnet" element={<DotNetStudy />} />
                 <Route path="/contact"  element={<Contact />} />
                 <Route path="/privacy"  element={<Privacy />} />
                 <Route path="/unsubscribe" element={<Unsubscribe />} />

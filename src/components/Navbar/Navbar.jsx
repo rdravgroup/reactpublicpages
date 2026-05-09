@@ -125,10 +125,14 @@ export default function Navbar() {
 
             <li>
               <NavLink to="/study" className={active}>Study <span className="chevron">▾</span></NavLink>
-              <div className="dropdown" style={{ minWidth: 220 }} role="menu">
+              <div className="dropdown" style={{ minWidth: 300 }} role="menu">
                 <NavLink to="/study/react">
                   <span className="dd-icon">⚛️</span>
                   <span><span className="dd-label">React</span><span className="dd-desc">Study guide and notes</span></span>
+                </NavLink>
+                <NavLink to="/study/dotnet">
+                  <span className="dd-icon">🧩</span>
+                  <span><span className="dd-label">.NET Core</span><span className="dd-desc">Web API &amp; Visual Studio</span></span>
                 </NavLink>
               </div>
             </li>
@@ -198,7 +202,7 @@ export default function Navbar() {
           🏠 &nbsp;Home
         </NavLink>
 
-        {[
+          {[
           { key:'services', label:'Services', links:[
             ['/services#consulting','💼','IT Consulting'],
             ['/services#development','⚙️','Software Engineering'],
@@ -215,6 +219,7 @@ export default function Navbar() {
           ]},
           { key:'study', label:'Study', links:[
             ['/study/react','⚛️','React'],
+            ['/study/dotnet','🧩','.NET Core'],
           ]},
         ].map(g => (
           <div className="mob-group" key={g.key}>

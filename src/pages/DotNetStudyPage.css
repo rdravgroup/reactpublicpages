@@ -1,0 +1,111 @@
+/* DotNetStudyPage.css — theme-aware styles for .NET Core study cards */
+.dotnet-study-container {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+.study-header { margin-bottom: 18px; }
+.study-header h1 { margin: 0 0 6px 0; color: var(--text-primary); }
+.intro-text { margin: 0; color: var(--text-secondary); }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.dotnet-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.dotnet-card:hover { transform: translateY(-4px); box-shadow: var(--md-sys-elevation-3); }
+
+.thumb-btn { border: 0; padding: 0; background: transparent; cursor: pointer; display: block; width: 100%; }
+.thumb-img { width: 100%; height: 160px; object-fit: cover; display: block; }
+
+.card-meta { padding: 12px; }
+.card-title { font-weight: 700; color: var(--text-primary); font-size: 0.98rem; }
+.card-desc-head { font-size: .85rem; color: var(--text-primary); margin-top: 6px; font-weight: 600 }
+.card-desc { margin-top: 6px; color: var(--text-secondary); font-size: .9rem; line-height: 1.3 }
+
+.dotnet-lightbox {
+  position: fixed; inset: 0; display:flex; align-items:center; justify-content:center;
+  background: var(--lightbox-overlay, rgba(2,6,23,0.8)); z-index: 9999; padding: 24px;
+}
+.dotnet-lightbox-inner { max-width: 96vw; max-height: 92vh; background: transparent; display:flex; flex-direction:column; gap:12px; }
+.lightbox-media { display:flex; align-items:center; justify-content:center; overflow: hidden; }
+.lightbox-img { max-width: 100%; max-height: 76vh; object-fit:contain; margin: 0 auto; display:block; border-radius:6px; transition: transform .12s ease; transform-origin: center center; }
+.lightbox-img-wrap { display:inline-block; }
+.lightbox-media { touch-action: none; cursor: grab; }
+.lightbox-media.grabbing { cursor: grabbing; }
+.lightbox-actions { display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap; }
+.zoom-controls { display:inline-flex; gap:6px; align-items:center; }
+.btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-primary); text-decoration:none; }
+.btn:hover { transform: translateY(-2px); }
+.btn-download { background: var(--accent-1); color: var(--md-on-primary); border-color: var(--accent-1); }
+.btn-outline { background: transparent; }
+.btn-close { background: transparent; }
+.btn-maximize { background: transparent; }
+.btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-primary); text-decoration:none; }
+.btn-outline { background: transparent; }
+.btn-download { background: var(--accent-1); color: var(--md-on-primary); border-color: var(--accent-1); }
+.btn-close { background: transparent; }
+
+/* Lightbox-specific button colors to ensure contrast over the overlay */
+.dotnet-lightbox .btn {
+  color: var(--lightbox-btn-text, var(--md-on-surface, #fff));
+  background: var(--lightbox-btn-bg, rgba(255,255,255,0.04));
+  border-color: var(--lightbox-btn-border, rgba(255,255,255,0.12));
+}
+.dotnet-lightbox .btn:hover { transform: translateY(-2px); }
+.dotnet-lightbox .btn:focus { outline: 2px solid var(--lightbox-btn-border, rgba(255,255,255,0.12)); outline-offset: 2px; }
+.dotnet-lightbox .btn-outline,
+.dotnet-lightbox .btn-close,
+.dotnet-lightbox .btn-maximize {
+  background: transparent;
+  color: var(--lightbox-btn-text, var(--md-on-surface, #fff));
+  border-color: var(--lightbox-btn-border, rgba(255,255,255,0.12));
+}
+.dotnet-lightbox .btn-download {
+  background: var(--accent-1);
+  color: var(--md-on-primary);
+  border-color: var(--accent-1);
+}
+
+@media (max-width: 640px) {
+  .thumb-img { height: 130px; }
+  .cards-grid { gap: 12px; }
+}
+
+/* Search row */
+.search-row { display:flex; gap:8px; align-items:center; margin-top:12px; }
+.search-input {
+  flex: 1; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--input-border);
+  background: var(--input-bg, var(--bg-surface)); color: var(--input-text, var(--text-primary)); outline: none; font-size: .95rem;
+}
+.search-input::placeholder { color: var(--input-ph); }
+.btn-clear { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-primary); }
+.results-count { margin-top: 8px; color: var(--text-secondary); font-size: .9rem }
+.no-results { margin-top: 12px; color: var(--text-secondary); text-align: center }
+
+.lightbox-desc { padding: 8px 12px; color: var(--md-on-surface, #fff); max-width: 96vw; }
+.lightbox-desc h3 { margin: 0 0 6px 0; color: var(--md-on-surface, #fff); font-size: 1.05rem }
+.lightbox-desc p { margin: 0; color: rgba(255,255,255,0.88); line-height: 1.5 }
+
+/* Fullscreen tweaks */
+.dotnet-lightbox:fullscreen .dotnet-lightbox-inner,
+.dotnet-lightbox:-webkit-full-screen .dotnet-lightbox-inner {
+  max-width: 100vw; max-height: 100vh; padding: 8px;
+}
+.dotnet-lightbox:fullscreen .lightbox-img,
+.dotnet-lightbox:-webkit-full-screen .lightbox-img {
+  max-height: 94vh;
+}
