@@ -123,6 +123,16 @@ export default function Navbar() {
               </div>
             </li>
 
+            <li>
+              <NavLink to="/study" className={active}>Study <span className="chevron">▾</span></NavLink>
+              <div className="dropdown" style={{ minWidth: 220 }} role="menu">
+                <NavLink to="/study/react">
+                  <span className="dd-icon">⚛️</span>
+                  <span><span className="dd-label">React</span><span className="dd-desc">Study guide and notes</span></span>
+                </NavLink>
+              </div>
+            </li>
+
             <li><NavLink to="/about"   className={active}>About</NavLink></li>
             <li><NavLink to="/blog"    className={active}>Blog</NavLink></li>
             <li><NavLink to="/contact" className={active}>Contact</NavLink></li>
@@ -202,6 +212,9 @@ export default function Navbar() {
             ['/products#shadi','💍','Shadi Portal'],
             ['/products#ride','🚗','CX Ride'],
             ['/products','📦','All Products'],
+          ]},
+          { key:'study', label:'Study', links:[
+            ['/study/react','⚛️','React'],
           ]},
         ].map(g => (
           <div className="mob-group" key={g.key}>

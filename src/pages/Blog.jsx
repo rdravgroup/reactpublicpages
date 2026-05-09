@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { usePageReveal } from '../hooks/useScrollReveal.js'
 import './Blog.css'
 import { useSEO, SEO_PAGES } from '../hooks/useSEO.js'
+import { subscribeNewsletter } from '../utils/contactApi.js'
 
 const CATS = ['all','engineering','product','devops','company']
 
@@ -20,15 +21,26 @@ export default function Blog() {
   useSEO(SEO_PAGES.blog)
   const [cat, setCat]       = useState('all')
   const [email, setEmail]   = useState('')
-  const [subOk, setSubOk]   = useState(false)
-  const [subErr, setSubErr] = useState('')
+  const [status, setStatus] = useState(null) // null | 'loading' | 'ok' | 'err'
+  const [msg, setMsg]       = useState('')
   const filtered = cat === 'all' ? POSTS : POSTS.filter(p => p.cat === cat)
 
-  const subscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { setSubErr('Enter a valid email.'); return }
-    setSubOk(true); setEmail(''); setSubErr('')
-    setTimeout(() => setSubOk(false), 4000)
+    const trimmed = email.trim()
+    if (!trimmed) { setStatus('err'); setMsg('Please enter your email address.'); return }
+    if (trimmed.length > 33) { setStatus('err'); setMsg('Email must be 33 characters or less.'); return }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setStatus('err'); setMsg('Please enter a valid email address.'); return
+    }
+    setStatus('loading')
+    try {
+      const m = await subscribeNewsletter(trimmed)
+      setStatus('ok'); setMsg(m || 'Subscribed!'); setEmail('')
+      setTimeout(() => setStatus(null), 4000)
+    } catch (err) {
+      setStatus('err'); setMsg(err.message || 'Something went wrong.')
+    }
   }
 
   return (
@@ -110,17 +122,27 @@ export default function Blog() {
             <div style={{ fontSize:'2rem', marginBottom:'.75rem', textAlign:'center' }}>✉️</div>
             <h3 style={{ fontSize:'1.4rem', fontWeight:800, marginBottom:'.5rem', textAlign:'center', color:'var(--text-primary)' }}>Never Miss a Post</h3>
             <p style={{ fontSize:'.875rem', color:'var(--text-secondary)', marginBottom:'1.5rem', textAlign:'center' }}>Weekly digest — no spam, unsubscribe anytime.</p>
-            {subOk
-              ? <p style={{ textAlign:'center', color:'#4caf50', fontWeight:600 }}>✓ You're subscribed!</p>
+            {status === 'ok'
+              ? <p style={{ textAlign:'center', color:'#4caf50', fontWeight:600 }}>✓ {msg || "You're subscribed!"}</p>
               : (
-                <form className="newsletter-row" onSubmit={subscribe} noValidate style={{ maxWidth:'100%' }}>
-                  <input type="email" className="newsletter-input" placeholder="your@email.com" value={email}
-                    onChange={e => { setEmail(e.target.value); setSubErr('') }} aria-label="Newsletter email" />
-                  <button type="submit" className="btn btn-grad btn-sm" style={{ whiteSpace:'nowrap' }}>Subscribe</button>
+                <form className="newsletter-row" onSubmit={handleSubscribe} noValidate style={{ maxWidth:'100%' }}>
+                  <input
+                    type="email"
+                    className="newsletter-input"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={e => { setEmail(e.target.value); setStatus(null); setMsg('') }}
+                    aria-label="Newsletter email"
+                    disabled={status === 'loading' || status === 'ok'}
+                    maxLength={33}
+                  />
+                  <button type="submit" className="btn btn-grad btn-sm" disabled={status === 'loading' || status === 'ok'} style={{ whiteSpace:'nowrap' }}>
+                    {status === 'loading' ? '…' : status === 'ok' ? '✓' : 'Subscribe'}
+                  </button>
                 </form>
               )
             }
-            {subErr && <p style={{ color:'#f44336', fontSize:'.8rem', marginTop:'.5rem', textAlign:'center' }}>{subErr}</p>}
+            {status === 'err' && <p style={{ color:'#f44336', fontSize:'.8rem', marginTop:'.5rem', textAlign:'center' }}>{msg}</p>}
           </div>
         </div>
       </section>
